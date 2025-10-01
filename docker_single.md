@@ -27,6 +27,7 @@ API 端口 8090
 
 ```
 
+# 开发调试
 
 
 ### 拉取服务端代码
@@ -41,4 +42,17 @@ git clone  git@github.com:bearxiao9756/TangSengDaoDaoWeb.git
 ```
 git clone git@github.com:bearxiao9756/TangSengDaoDaoManager.git
 ```
-## 安装 docker 
+
+### 编译镜像
+编译后台服务
+```
+docker build -t  tsddserver .
+```
+编译web 
+```
+docker build -t tsddweb .
+```
+编译改变web，暂定为 kehu
+```
+docker build -t tsddkehu .
+```
