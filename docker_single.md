@@ -57,3 +57,18 @@ docker build -t tsddweb .
 docker build -t tsddkehu .
 
 ```
+编译后台
+```
+docker build -t tsddmanager .
+```
+
+### git 处理
+
+同步远程分支信息
+```
+git fetch --all
+```
+切换分支
+```
+git checkout   branch name
+```
