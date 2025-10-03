@@ -24,9 +24,12 @@ services:
       timeout: 10s
       retries: 5
     depends_on:
-       - redis
-       - mysql
-       - wukongim
+       - redis:
+          condition: service_healthy 
+       - mysql:
+          condition: service_healthy 
+       - wukongim:
+          condition: service_healthy 
     ports:
       - "8090:8090"
     volumes:
