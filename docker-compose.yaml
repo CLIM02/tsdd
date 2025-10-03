@@ -22,7 +22,7 @@ services:
       test: "wget -q -Y off -O /dev/null http://localhost:8090/v1/ping > /dev/null 2>&1"
       interval: 10s
       timeout: 10s
-      retries: 3
+      retries: 5
     depends_on:
        - redis
        - mysql
