@@ -15,7 +15,7 @@ services:
       - .env
     environment:
       - WK_EXTERNAL_IP=${EXTERNAL_IP}
-      - WK_EXTERNAL_WSSADDR=${WK_EXTERNAL_WSSADDR}
+      # - WK_EXTERNAL_WSSADDR=${WK_EXTERNAL_WSSADDR}
   tangsengdaodaoserver:  # 唐僧叨叨的业务服务
     image: tsddserver:latest
     restart: always
