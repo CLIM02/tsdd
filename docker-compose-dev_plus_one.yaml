@@ -11,7 +11,7 @@ services:
       - "5210:5210"
     volumes:
       - ./wukongim:/root/wukongim
-      - ./nginx:/root/wukongim/nginx
+      - ./nginx:/root/nginx
     env_file:
       - .env
     environment:
