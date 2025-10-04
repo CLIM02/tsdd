@@ -11,8 +11,7 @@ services:
       - "5210:5210"
     volumes:
       - ./wukongim:/root/wukongim
-      - ./nginx/certs/hy82s2hjk23.icu_bundle.crt:/root/nginx/hy82s2hjk23.icu_bundle.crt
-      - ./nginx/certs/hy82s2hjk23.icu.key:/root/nginx/hy82s2hjk23.icu.key 
+      - ./nginx:/root/wukongim/nginx
     env_file:
       - .env
     environment:
