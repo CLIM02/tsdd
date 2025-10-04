@@ -1,16 +1,11 @@
 # docker 单机部署
 ## 拉取代码与配置
-
-
 ### 拉取配置
 ```
 git@github.com:CLIM02/tsdd.git
 ```
-
 ## 安装 docker
-
 ## 安装 compose
-
 ## 运行
 ```
 docker-compose -f docker-compose.yaml up -d
