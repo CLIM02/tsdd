@@ -17,7 +17,7 @@ services:
       - WK_EXTERNAL_IP=${EXTERNAL_IP}
       # - WK_EXTERNAL_WSSADDR=${WK_EXTERNAL_WSSADDR}
   tangsengdaodaoserver:  # 唐僧叨叨的业务服务
-    image: tsddserver:latest
+    image: tsddserver123gov:latest
     restart: always
     command: "api"
     healthcheck:
@@ -44,7 +44,7 @@ services:
       - TS_MINIO_SECRETACCESSKEY=${MINIO_ROOT_PASSWORD}
   
   tangsengdaodaoweb:  # 唐僧叨叨的web服务
-    image: tsddweb:latest
+    image: tsddweb123gov:latest
     restart: always
     env_file:             # <--- 新增这一块
       - .123govenv
@@ -57,7 +57,7 @@ services:
       - tangsengdaodaoserver
   
   tangsengdapdapkefu: # 唐僧叨叨的客服
-    image: tsddkefu:latest
+    image: tsddkefu123gov:latest
     restart: always
     env_file:             # <--- 新增这一块
       - .123govenv
@@ -70,7 +70,7 @@ services:
       - tangsengdaodaoserver
   
   tangsengdaodaomanager:  # 唐僧叨叨的后台管理系统
-    image: tsddmanager:latest
+    image: tsddmanager123gov:latest
     restart: always
     env_file:             # <--- 新增这一块
       - .123govenv
