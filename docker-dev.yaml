@@ -44,15 +44,15 @@ services:
       - TS_MINIO_ACCESSKEYID=${MINIO_ROOT_USER}
       - TS_MINIO_SECRETACCESSKEY=${MINIO_ROOT_PASSWORD}
   
-  # tangsengdaodaoweb:  # 唐僧叨叨的web服务
-  #   image: tsddweb:latest
-  #   restart: always
-  #   environment:
-  #     - API_URL=http://tangsengdaodaoserver:8090/
-  #   ports:
-  #     - "82:80"
-  #   # 修正：移除 condition: service_healthy
-  #   depends_on:
+  tangsengdaodaoweb:  # 唐僧叨叨的web服务
+    image: tsddweb:latest
+    restart: always
+    environment:
+      - API_URL=http://tangsengdaodaoserver:8090/
+    ports:
+      - "82:80"
+    # 修正：移除 condition: service_healthy
+    depends_on:
   #     - tangsengdaodaoserver
   
   tangsengdapdapkefu: # 唐僧叨叨的客服
