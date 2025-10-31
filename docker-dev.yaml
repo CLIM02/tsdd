@@ -55,16 +55,16 @@ services:
   #   depends_on:
   #     - tangsengdaodaoserver
   
-  # tangsengdapdapkefu: # 唐僧叨叨的客服
-    # image: tsddkefu:latest
-    # restart: always
-    # environment:
-    #   - API_URL=http://tangsengdaodaoserver:8090/
-    # ports:
-    #   - "85:80"
-    # # 修正：移除 condition: service_healthy
-    # depends_on:
-    #   - tangsengdaodaoserver
+  tangsengdapdapkefu: # 唐僧叨叨的客服
+    image: tsddkefu:latest
+    restart: always
+    environment:
+      - API_URL=http://tangsengdaodaoserver:8090/
+    ports:
+      - "85:80"
+    # 修正：移除 condition: service_healthy
+    depends_on:
+      - tangsengdaodaoserver
   
   tangsengdaodaomanager:  # 唐僧叨叨的后台管理系统
     image: tsddmanager:latest
