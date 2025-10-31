@@ -12,7 +12,7 @@ services:
       - ./wukongim:/root/wukongim
       - ./nginx:/root/nginx
     env_file:
-      - .123eduenv
+      - .123govenv
     environment:
       - WK_EXTERNAL_IP=${EXTERNAL_IP}
       # - WK_EXTERNAL_WSSADDR=${WK_EXTERNAL_WSSADDR}
@@ -35,7 +35,7 @@ services:
       - ./tsdd:/home/tsdddata
       - ./tsdd/configs:/home/configs  # 配置文件的挂载
     env_file:
-      - .123eduenv
+      - .123govenv
     environment:
       - TS_DB_MYSQLADDR=root:${MYSQL_ROOT_PASSWORD}@tcp(mysql)/${MYSQL_DATABASE}?charset=utf8mb4&parseTime=true&loc=Local
       - TS_EXTERNAL_IP=${EXTERNAL_IP}
@@ -47,7 +47,7 @@ services:
     image: tsddweb:latest
     restart: always
     env_file:             # <--- 新增这一块
-      - .123eduenv
+      - .123govenv
     environment:
       - API_URL=http://tangsengdaodaoserver:8090/
     ports:
@@ -60,7 +60,7 @@ services:
     image: tsddkefu:latest
     restart: always
     env_file:             # <--- 新增这一块
-      - .123eduenv
+      - .123govenv
     environment:
       - API_URL=http://tangsengdaodaoserver:8090/
     ports:
@@ -73,7 +73,7 @@ services:
     image: tsddmanager:latest
     restart: always
     env_file:             # <--- 新增这一块
-      - .123eduenv
+      - .123govenv
     environment:
       - API_URL=http://tangsengdaodaoserver:8090/
     ports:
@@ -92,7 +92,7 @@ services:
       - "9000:9000"
       - "9001:9001"
     env_file:             # <--- 新增这一块
-      - .123eduenv
+      - .123govenv
     environment:
       - MINIO_ROOT_USER=${MINIO_ROOT_USER}
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
@@ -112,7 +112,7 @@ services:
     volumes:
       - ./mysqldata:/var/lib/mysql
     env_file:             # <--- 新增这一块
-      - .123eduenv
+      - .123govenv
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
@@ -122,7 +122,7 @@ services:
     image: registry.cn-shanghai.aliyuncs.com/wukongim/redis:7.2.3
     restart: always
     env_file:             # <--- 新增这一块
-      - .123eduenv
+      - .123govenv
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 1s
@@ -134,6 +134,6 @@ services:
     ports:
       - 8306:8080
     env_file:             # <--- 新增这一块
-      - .123eduenv
+      - .123govenv
     depends_on:
       - mysql
