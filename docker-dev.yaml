@@ -8,6 +8,7 @@ services:
       - "5100:5100"  # tcp长连接端口（外网开放）
       - "5200:5200" # websocket端口（外网开放）
       - "5300:5300" # 监控端口
+      - "5001:5001"
     volumes:
       - ./wukongim:/root/wukongim
       - ./nginx:/root/nginx
@@ -117,7 +118,7 @@ services:
       timeout: 3s
       retries: 30
 
-      
+
   
   adminer:  # mysql web管理工具 调试用
     image: registry.cn-shanghai.aliyuncs.com/wukongim/adminer:latest
