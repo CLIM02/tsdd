@@ -53,7 +53,7 @@ services:
       - "82:80"
     # 修正：移除 condition: service_healthy
     depends_on:
-  #     - tangsengdaodaoserver
+      - tangsengdaodaoserver
   
   tangsengdapdapkefu: # 唐僧叨叨的客服
     image: tsddkefu:latest
