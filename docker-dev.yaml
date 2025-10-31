@@ -116,6 +116,8 @@ services:
       interval: 1s
       timeout: 3s
       retries: 30
+
+      
   
   adminer:  # mysql web管理工具 调试用
     image: registry.cn-shanghai.aliyuncs.com/wukongim/adminer:latest
