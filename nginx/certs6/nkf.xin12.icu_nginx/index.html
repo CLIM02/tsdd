@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    (function(global, document, scriptUrl, callback) {
+        const head = document.getElementsByTagName('head')[0];
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = scriptUrl + "/static/js/chat-widget.js";
+        script.onload = script.onreadystatechange = function () {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+                callback(scriptUrl);
+            }
+        };
+        head.appendChild(script);
+    })(window, document, "http://43.160.247.125:8081", function(baseUrl) {
+        CHAT_WIDGET.initialize({
+            API_URL: baseUrl,
+            AGENT_ID: "agent",
+        });
+    });
+</script>
+</body>
+</html>
