@@ -27,7 +27,7 @@ services:
       retries: 3
     depends_on:
       - redis
-      - mysql
+      - proxysql
       - wukongim
     ports:
       - "8090:8090"
@@ -107,7 +107,36 @@ services:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
-  
+  mysql-slave1:
+    image: registry.cn-shanghai.aliyuncs.com/wukongim/mysql:8.0.33
+    container_name: mysql-slave1
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./mysqldata-slave1:/var/lib/mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} # 沿用 Master 密码
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_SERVER_ID=2 # Slave ID 必须与 Master (默认是 1) 不同
+    depends_on:
+      - mysql
+    ports:
+      - "3317:3306" # 暴露端口方便调试
+  proxysql:
+    image: proxysql/proxysql:2.5.5
+    container_name: proxysql
+    ports:
+      - "6033:6033" # 应用连接入口
+      - "6032:6032" # 管理端口
+    volumes:
+      - ./proxysql/conf:/etc/proxysql:ro
+      - ./proxysql/data:/var/lib/proxysql
+    depends_on:
+      - mysql # 依赖 Master
+      - mysql-slave1 # 依赖 Slave
+    environment:
+      PROXYSQL_ADMIN_PASSWORD: af45d4daS* # 您的 ProxySQL 管理密码
+
   redis:  # redis
     image: registry.cn-shanghai.aliyuncs.com/wukongim/redis:7.2.3
     restart: always
