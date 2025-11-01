@@ -27,7 +27,7 @@ services:
       retries: 3
     depends_on:
       - redis
-      - proxysql
+      - Asiaproxysql
       - wukongim
     ports:
       - "8090:8090"
@@ -124,7 +124,7 @@ services:
       - mysql
     ports:
       - "3317:3306" # 暴露端口方便调试
-  proxysql:
+  Asiaproxysql:
     image: proxysql/proxysql:2.5.5
     container_name: proxysql
     ports:
