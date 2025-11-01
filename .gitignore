@@ -3,7 +3,8 @@ miniodata/
 mysqldata/
 tsdd/
 wukongim/
-
+mysqldata/
+grafana/
 # 此外，根据您之前的配置，还应该忽略以下文件和目录：
 # 1. 忽略本地环境文件，包含密码等敏感信息
 
