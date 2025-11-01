@@ -1,0 +1,83 @@
+# docker-compose.monitor.yml
+
+version: '3.7'
+services:
+  # -----------------------------------------------------
+  # 1. Prometheus Server
+  # -----------------------------------------------------
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: tsdd_prometheus_1
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml # 确保 prometheus.yml 存在
+    ports:
+      - "9090:9090"
+    restart: always
+    networks:
+      - wukongim_net
+      
+  # -----------------------------------------------------
+  # 2. MySQL Exporter
+  # -----------------------------------------------------
+  mysql_exporter:
+    image: prom/mysqld-exporter:latest
+    container_name: tsdd_mysql_exporter_1
+    restart: always
+    environment:
+      # 注意：这里使用 'tsdd_mysql_1' 作为主机名，依赖于应用容器的 service name
+      - DATA_SOURCE_NAME=root:Aa12Aa12Aa@(tsdd_mysql_1:3306)/
+    ports:
+      - "9104:9104"
+    networks:
+      - wukongim_net
+    
+  # -----------------------------------------------------
+  # 3. Redis Exporter
+  # -----------------------------------------------------
+  redis_exporter:
+    image: oliver006/redis_exporter:latest
+    container_name: tsdd_redis_exporter_1
+    restart: always
+    command: 
+      - '--redis.addr=redis://tsdd_redis_1:6379'
+    ports:
+      - "9121:9121"
+    networks:
+      - wukongim_net
+      
+  # -----------------------------------------------------
+  # 4. Blackbox Exporter
+  # -----------------------------------------------------
+  blackbox_exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: tsdd_blackbox_exporter_1
+    restart: always
+    ports:
+      - "9115:9115"
+    networks:
+      - wukongim_net
+  grafana:
+    image: grafana/grafana:latest
+    container_name: tsdd_grafana_1
+    restart: always
+    ports:
+      - "3000:3000" # Grafana Web UI 端口
+    volumes:
+      # 用于持久化配置和数据的卷
+      - grafana_data:/var/lib/grafana
+      # 挂载配置文件夹，用于自动添加数据源和仪表盘（见步骤 2）
+      - ./grafana/provisioning:/etc/grafana/provisioning 
+    environment:
+      # 设置默认管理员密码
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin52435 # !! 强烈建议替换密码 !!
+      # 允许匿名访问，可选
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+    networks:
+      - tsdd_default
+    depends_on:
+      - prometheus
+
+networks:
+  wukongim_net:
+    external: true

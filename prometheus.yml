@@ -1,0 +1,58 @@
+global:
+  scrape_interval: 15s 
+  evaluation_interval: 15s
+
+scrape_configs:
+  # 1. Prometheus 自身监控
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # 2. WuKongIM 核心服务监控 (服务名: wukongim, 指标端口: 5300)
+  - job_name: 'wukongim-metrics'
+    static_configs:
+      - targets: ['wukongim:5300'] 
+
+  # 3. MinIO 文件存储监控 (服务名: minio, 指标端口: 9000)
+  - job_name: 'minio-metrics'
+    static_configs:
+      - targets: ['minio:9000'] 
+
+  # 4. MySQL 监控 (通过 MySQL Exporter: mysql_exporter)
+  - job_name: 'mysql-metrics'
+    static_configs:
+      - targets: ['mysql_exporter:9104'] 
+
+  # 5. Redis 监控 (通过 Redis Exporter: redis_exporter)
+  - job_name: 'redis-metrics'
+    static_configs:
+      - targets: ['redis_exporter:9121'] 
+
+  # 6. HTTP 服务健康检查 (通过 Blackbox Exporter: blackbox_exporter)
+  # 监控 tangsengdaodaoserver, tangsengdaodaoweb, tangsengdapdapkefu, tangsengdaodaomanager, adminer
+  - job_name: 'http-health-checks'
+    metrics_path: /probe
+    params:
+      module: [http_2xx] # 检查 HTTP 状态码是否为 200
+    static_configs:
+      - targets:
+        # tsddserver
+        - http://tangsengdaodaoserver:8090/
+        # tsddweb
+        - http://tangsengdaodaoweb:80/
+        # tsddkefu
+        - http://tangsengdapdapkefu:80/
+        # tsddmanager
+        - http://tangsengdaodaomanager:80/
+        # adminer
+        - http://adminer:8080/
+      
+      - labels:
+          instance: '{{ "__address__" | urlquery }}'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox_exporter:9115 # Blackbox Exporter 容器的地址
