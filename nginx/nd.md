@@ -37,3 +37,6 @@ CONTAINER_PORT=80
 
 反向代理APP
 ![alt text](image-1.png)
+
+
+docker run -d --name tsddweb_86 -e API_URL=https://abcedu.icu/api -p 86:80  tsddweb:latest
