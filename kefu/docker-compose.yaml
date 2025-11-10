@@ -1,0 +1,9 @@
+version: '3.1'
+services:
+  tangsengdapdapkefu: # 唐僧叨叨的客服
+    image: tsddkefu:latest
+    restart: always
+    environment:
+      - API_URL=http://tangsengdaodaoserver:8090/
+    ports:
+      - "85:80"

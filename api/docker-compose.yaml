@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+  tangsengdaodaoserver:  # 唐僧叨叨的业务服务
+    image: tsddserver:latest
+    restart: always
+    command: "api"
+    healthcheck:
+      test: "wget -q -Y off -O /dev/null http://localhost:8090/v1/ping > /dev/null 2>&1"
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - redis
+      - mysql
+      - wukongim
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./tsdd:/home/tsdddata
+      - ./tsdd/configs:/home/configs  # 配置文件的挂载
+    env_file:
+      - .env
+    environment:
+      - TS_DB_MYSQLADDR=root:${MYSQL_ROOT_PASSWORD}@tcp(mysql)/${MYSQL_DATABASE}?charset=utf8mb4&parseTime=true&loc=Local
+      - TS_EXTERNAL_IP=${EXTERNAL_IP}
+      - TS_FILESERVICE=${TS_FILESERVICE}
+      - TS_MINIO_ACCESSKEYID=${MINIO_ROOT_USER}
+      - TS_MINIO_SECRETACCESSKEY=${MINIO_ROOT_PASSWORD}
+  

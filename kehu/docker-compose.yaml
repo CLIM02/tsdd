@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  tangsengdaodaoweb:  # 唐僧叨叨的web服务
+    image: tsddweb:latest
+    restart: always
+    environment:
+      - API_URL=http://tangsengdaodaoserver:8090/
+    ports:
+      - "82:80"
+    # 修正：移除 condition: service_healthy
+    depends_on:
+      - tangsengdaodaoserver
