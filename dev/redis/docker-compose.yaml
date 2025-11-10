@@ -1,6 +1,5 @@
 version: '3.1'
 services:
-  
   redis:  # redis
     image: registry.cn-shanghai.aliyuncs.com/wukongim/redis:7.2.3
     restart: always
