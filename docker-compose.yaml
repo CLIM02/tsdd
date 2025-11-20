@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  wukongim:  # 唐僧叨叨通讯服务（悟空IM）
+  wukongim:  # 上海华年通讯服务（悟空IM）
     image: registry.cn-shanghai.aliyuncs.com/wukongim/wukongim:v2
     restart: always
     ports:
@@ -16,7 +16,7 @@ services:
     environment:
       - WK_EXTERNAL_IP=${EXTERNAL_IP}
       # - WK_EXTERNAL_WSSADDR=${WK_EXTERNAL_WSSADDR}
-  tangsengdaodaoserver:  # 唐僧叨叨的业务服务
+  tangsengdaodaoserver:  # 上海华年的业务服务
     image: tsddserver:latest
     restart: always
     command: "api"
@@ -43,7 +43,7 @@ services:
       - TS_MINIO_ACCESSKEYID=${MINIO_ROOT_USER}
       - TS_MINIO_SECRETACCESSKEY=${MINIO_ROOT_PASSWORD}
   
-  tangsengdaodaoweb:  # 唐僧叨叨的web服务
+  tangsengdaodaoweb:  # 上海华年的web服务
     image: tsddweb:latest
     restart: always
     environment:
@@ -54,7 +54,7 @@ services:
     depends_on:
       - tangsengdaodaoserver
   
-  tangsengdapdapkefu: # 唐僧叨叨的客服
+  tangsengdapdapkefu: # 上海华年的客服
     image: tsddkefu:latest
     restart: always
     environment:
@@ -65,7 +65,7 @@ services:
     depends_on:
       - tangsengdaodaoserver
   
-  tangsengdaodaomanager:  # 唐僧叨叨的后台管理系统
+  tangsengdaodaomanager:  # 上海华年的后台管理系统
     image: tsddmanager:latest
     restart: always
     environment:
