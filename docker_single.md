@@ -39,6 +39,11 @@ git clone -b 123edus --single-branch git@github.com:bearxiao9756/TangSengDaoDaoS
 git clone -b 123edux --single-branch git@github.com:bearxiao9756/TangSengDaoDaoServer.git
 
 ```
+都有
+```
+git clone -b 123eduall --single-branch git@github.com:bearxiao9756/TangSengDaoDaoServer.git
+
+```
 
 ## 拉取代码与配置
 ### 拉取配置
