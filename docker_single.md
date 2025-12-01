@@ -1,4 +1,45 @@
 # docker 单机部署
+
+## 仓库代码
+
+1. 部署仓库地址
+```
+https://github.com/CLIM02/tsdd
+
+git clone -b main0_https --single-branch git@github.com:CLIM02/tsdd.git
+
+```
+2. 客服工作台仓库地址
+```
+git clone -b 123edu --single-branch git@github.com:bearxiao9756/TangSengDaoDaoWeb.git
+```
+3. 客户A链仓库地址
+```
+git clone -b 123edu_B --single-branch git@github.com:bearxiao9756/TangSengDaoDaoWeb.git
+```
+4. 后台管理系统仓库地址
+```
+git clone -b 123edu --single-branch git@github.com:bearxiao9756/TangSengDaoDaoManager.git
+```
+5. 后台服务仓库地址
+
+大群
+
+```
+git clone -b 123edum --single-branch git@github.com:bearxiao9756/TangSengDaoDaoServer.git
+```
+单群
+
+```
+git clone -b 123edus --single-branch git@github.com:bearxiao9756/TangSengDaoDaoServer.git
+
+```
+无群
+```
+git clone -b 123edux --single-branch git@github.com:bearxiao9756/TangSengDaoDaoServer.git
+
+```
+
 ## 拉取代码与配置
 ### 拉取配置
 ```
